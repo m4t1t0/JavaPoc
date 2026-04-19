@@ -1,11 +1,12 @@
 IMAGE := javapoc
 PORT  := 8080
 
-.PHONY: help dev watch test build run up stop shell logs clean rebuild
+.PHONY: help dev debug watch test build run up stop shell logs clean rebuild
 
 help:
 	@echo "Local dev (fast hot-reload, needs local JDK 25):"
 	@echo "  make dev      - run the app locally with Spring Boot DevTools"
+	@echo "  make debug    - run the app in JDWP debug mode on port 5005"
 	@echo "  make watch    - (second terminal) recompile on file change"
 	@echo "  make test     - run tests"
 	@echo ""
@@ -21,6 +22,9 @@ help:
 
 dev:
 	./gradlew bootRun
+
+debug:
+	./gradlew bootRun --debug-jvm
 
 watch:
 	./gradlew build --continuous -x test
